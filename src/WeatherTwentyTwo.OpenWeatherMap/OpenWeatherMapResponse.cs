@@ -10,6 +10,7 @@ namespace WeatherTwentyTwo
     {
         public OpenWeatherMapResponse(Readings readings)
         {
+            this.CityName = readings.CityName;
             this.CityId = readings.CityId;
             this.CountryCode = readings.CountryCode;
             this.Temperature = readings.Temperature;
