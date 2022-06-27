@@ -34,6 +34,14 @@ namespace WeatherTwentyTwo
             this.FetchedTime = readings.FetchedTime;
             this.MeasuredTime = readings.MeasuredTime;
             this.OpenWeatherMapReading = readings;
+            if (readings.Weather.Any())
+            {
+                this.DefaultCondition = new OpenWeatherMapConditions(readings.Weather.First());
+                foreach (var item in readings.Weather)
+                {
+                    this.Conditions.Add(new OpenWeatherMapConditions(item));
+                }
+            }
         }
 
         /// <summary>

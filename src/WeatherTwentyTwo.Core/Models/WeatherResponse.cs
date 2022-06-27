@@ -53,5 +53,9 @@ namespace WeatherTwentyTwo
         public DateTime FetchedTime { get; set; }
 
         public DateTime MeasuredTime { get; set; }
+
+        public WeatherCondition? DefaultCondition { get; set; }
+
+        public List<WeatherCondition> Conditions { get; set; } = new List<WeatherCondition>();
     }
 }

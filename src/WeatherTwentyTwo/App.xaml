@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:WeatherTwentyTwo"
              x:Class="WeatherTwentyTwo.App">
     <Application.Resources>
-        <local:WeatherReportToCityNameConverter x:Key="WeatherReportToCityNameConverter"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <local:WeatherReportToImageConverter x:Key="WeatherReportToImageConverter"/>
+            <local:WeatherReportToCityNameConverter x:Key="WeatherReportToCityNameConverter"/>
+            <local:TemperatureToStringConverter x:Key="TemperatureToStringConverter"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

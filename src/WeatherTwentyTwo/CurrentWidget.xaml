@@ -9,14 +9,14 @@
         HeightRequest="200"
         HorizontalOptions="Center"
         Aspect="AspectFit"
-        Source="weather_partly_cloudy_day.png">
+        Source="{Binding WeatherReport, Converter={StaticResource WeatherReportToImageConverter}}">
             <!--<Image.Shadow>
             <Shadow Brush="#2B0B98" Offset="20,20" Radius="20" Opacity="0.8"/>
         </Image.Shadow>-->
         </Image>
 
         <Label
-        Text="52℉"
+        Text="{Binding WeatherReport.Temperature, Converter={StaticResource TemperatureToStringConverter}}"
         HorizontalOptions="Center"
         class="Title1" />
 
@@ -26,11 +26,8 @@
             HorizontalOptions="Center"
             Padding="15,4"
             >
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="60"/>
-            </Border.StrokeShape>
             <Label
-                    Text="Clear"
+                    Text="{Binding WeatherReport.DefaultCondition.Main}"
                     HorizontalOptions="Center"
                     FontSize="18"/>
         </Border>

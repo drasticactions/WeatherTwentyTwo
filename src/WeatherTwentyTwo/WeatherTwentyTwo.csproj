@@ -60,10 +60,13 @@
 	  <MauiXaml Update="HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\Styles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Resources\Styles\" />
+	  <PackageReference Include="UnitsNet" Version="5.0.0-alpha006" />
 	</ItemGroup>
 
 </Project>

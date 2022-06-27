@@ -30,6 +30,7 @@ namespace WeatherTwentyTwo
         {
             var owLocation = new OpenWeatherMap.Cache.Models.Location(location.Latitude, location.Longitude);
             OpenWeatherMap.Cache.Models.Readings result = await this.client.GetReadingsAsync(owLocation);
+            OpenWeatherMap.Cache.Models.WeatherCondition condition = result.Weather.First();
             return new OpenWeatherMapResponse(result);
         }
     }
