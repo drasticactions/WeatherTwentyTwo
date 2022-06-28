@@ -5,12 +5,12 @@
 namespace WeatherTwentyTwo.Core.Tests
 {
     /// <summary>
-    /// OpenWeatherMap.Cache Tests
+    /// OpenWeatherMap.Cache Tests.
     /// </summary>
     [TestClass]
     public class OpenWeatherMapCacheTest
     {
-        private OpenWeatherMap.Cache.OpenWeatherMapCache cache;
+        private OpenWeatherMap.Standard.Current cache;
         private OpenWeatherMapService service;
 
         public OpenWeatherMapCacheTest()
@@ -21,17 +21,16 @@ namespace WeatherTwentyTwo.Core.Tests
                 throw new ArgumentNullException("Open Weather Map API key must not be null!");
             }
 
-            this.cache = new OpenWeatherMap.Cache.OpenWeatherMapCache(key, 5000);
+            this.cache = new OpenWeatherMap.Standard.Current(key);
             this.service = new OpenWeatherMapService(this.cache);
         }
 
-        [DataRow(42.384080, -71.178179, "Watertown")] // Watertown, MA. United States.
+        [DataRow(42.384080, -71.178179)] // Watertown, MA. United States.
         [DataTestMethod]
-        public async Task GetWeatherAsyncTest(double latitude, double longitude, string cityName)
+        public async Task GetWeatherAsyncTest(double latitude, double longitude)
         {
             var result = await this.service.GetWeatherAsync(new Coordinate(latitude, longitude));
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.CityName, cityName);
         }
     }
 }

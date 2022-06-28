@@ -2,42 +2,60 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using OpenWeatherMap.Cache.Models;
+using OpenWeatherMap.Standard.Models;
+using UnitsNet;
 
 namespace WeatherTwentyTwo
 {
     public class OpenWeatherMapResponse : WeatherResponse
     {
-        public OpenWeatherMapResponse(Readings readings)
+        public OpenWeatherMapResponse(WeatherData data)
         {
-            this.CityName = readings.CityName;
-            this.CityId = readings.CityId;
-            this.CountryCode = readings.CountryCode;
-            this.Temperature = readings.Temperature;
-            this.Pressure = readings.Pressure;
-            this.Humidity = readings.Humidity;
-            this.MinimumTemperature = readings.MinimumTemperature;
-            this.MaximumTemperature = readings.MaximumTemperature;
-            this.SeaLevelPressure = readings.SeaLevelPressure;
-            this.GroundLevelPressure = readings.GroundLevelPressure;
-            this.WindSpeed = readings.WindSpeed;
-            this.WindDirection = readings.WindDirection;
-            this.WindGust = readings.WindGust;
-            this.Cloudiness = readings.Cloudiness;
-            this.RainfallLastHour = readings.RainfallLastHour;
-            this.RainfallLastThreeHours = readings.RainfallLastThreeHours;
-            this.SnowfallLastHour = readings.SnowfallLastHour;
-            this.SnowfallLastThreeHours = readings.SnowfallLastThreeHours;
-            this.Sunrise = readings.Sunrise;
-            this.Sunset = readings.Sunset;
-            this.TimeZoneOffset = readings.TimeZoneOffset;
-            this.FetchedTime = readings.FetchedTime;
-            this.MeasuredTime = readings.MeasuredTime;
-            this.OpenWeatherMapReading = readings;
-            if (readings.Weather.Any())
+            this.OpenWeatherMapReading = data;
+            if (data.WeatherDayInfo is not null)
             {
-                this.DefaultCondition = new OpenWeatherMapConditions(readings.Weather.First());
-                foreach (var item in readings.Weather)
+                this.Temperature = UnitsNet.Temperature.FromKelvins(data.WeatherDayInfo.Temperature);
+                this.Pressure = UnitsNet.Pressure.FromHectopascals(data.WeatherDayInfo.Pressure);
+                this.MinimumTemperature = UnitsNet.Temperature.FromKelvins(data.WeatherDayInfo.MinimumTemperature);
+                this.MaximumTemperature = UnitsNet.Temperature.FromKelvins(data.WeatherDayInfo.MaximumTemperature);
+                this.GroundLevelPressure = Pressure.FromHectopascals(data.WeatherDayInfo.GroundLevel);
+                this.SeaLevelPressure = Pressure.FromHectopascals(data.WeatherDayInfo.SeaLevel);
+            }
+
+            if (data.Rain is not null)
+            {
+                this.RainfallLastHour = Length.FromMillimeters(data.Rain.LastHour);
+                this.RainfallLastThreeHours = Length.FromMillimeters(data.Rain.LastThreeHours);
+            }
+
+            if (data.Snow is not null)
+            {
+                this.SnowfallLastHour = Length.FromMillimeters(data.Snow.LastHour);
+                this.SnowfallLastThreeHours = Length.FromMillimeters(data.Snow.LastThreeHours);
+            }
+
+            if (data.Clouds is not null)
+            {
+                this.Cloudiness = Ratio.FromPercent(data.Clouds.All);
+            }
+
+            if (data.Wind is not null)
+            {
+                this.WindDirection = Angle.FromDegrees(data.Wind.Degree);
+                this.WindSpeed = Speed.FromMetersPerSecond(data.Wind.Speed);
+                this.WindGust = Speed.FromMetersPerSecond(data.Wind.Gust);
+            }
+
+            this.Sunrise = data.DayInfo.Sunrise;
+            this.Sunrise = data.DayInfo.Sunset;
+
+            this.MeasuredTime = data.AcquisitionDateTime;
+            this.FetchedTime = DateTime.UtcNow;
+
+            if (data.Weathers is not null && data.Weathers.Any())
+            {
+                this.DefaultCondition = new OpenWeatherMapConditions(data.Weathers.First());
+                foreach (var item in data.Weathers)
                 {
                     this.Conditions.Add(new OpenWeatherMapConditions(item));
                 }
@@ -46,8 +64,8 @@ namespace WeatherTwentyTwo
 
         /// <summary>
         /// Gets the Open Weather Map Reading.
-        /// This is Raw from the OpenWeatherMap API and the OpenWeatherMap.Cache library.
+        /// This is Raw from the OpenWeatherMap API and the OpenWeatherMap.Standard library.
         /// </summary>
-        public Readings OpenWeatherMapReading { get; }
+        public WeatherData OpenWeatherMapReading { get; }
     }
 }

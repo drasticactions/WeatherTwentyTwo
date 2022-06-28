@@ -10,4 +10,16 @@
         <Setter Property="FontFamily" Value="OpenSansSemiBold"/>
     </Style>
     
+    <Style TargetType="Label"
+            Class="SectionTitle">
+        <Setter Property="FontSize"
+                Value="27"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+    </Style>
+
+    <Style TargetType="Label"
+            Class="Subhead">
+        <Setter Property="FontSize"
+                Value="14"/>
+    </Style>
 </ResourceDictionary>

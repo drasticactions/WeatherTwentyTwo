@@ -9,7 +9,7 @@ namespace WeatherTwentyTwo
     /// </summary>
     public class HomeViewModel : BaseViewModel
     {
-        private WeatherResponse? weatherReport;
+        private ForecastResponse? weatherReport;
         private Coordinate? coordinate;
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace WeatherTwentyTwo
         /// <summary>
         /// Gets or sets the home weather report.
         /// </summary>
-        public WeatherResponse? WeatherReport
+        public ForecastResponse? WeatherReport
         {
             get { return this.weatherReport; }
             set { this.SetProperty(ref this.weatherReport, value); }

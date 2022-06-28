@@ -10,13 +10,19 @@ namespace WeatherTwentyTwo.Services
     {
         public async Task<Coordinate> GetLocationAsync()
         {
-            var result = await Geolocation.GetLocationAsync();
-            if (result is not null)
-            {
-                return new Coordinate(result.Latitude, result.Longitude);
-            }
+            // TODO: Hard code location for now...
+            //try
+            //{
+            //    var result = await Geolocation.GetLocationAsync(new GeolocationRequest() { DesiredAccuracy = GeolocationAccuracy.Low, RequestFullAccuracy = false  });
+            //    if (result is not null)
+            //    {
+            //        return new Coordinate(result.Latitude, result.Longitude);
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //}
 
-            // TODO: Figure out what location to actually return.
             return new Coordinate(42.344903, -71.126069);
         }
     }

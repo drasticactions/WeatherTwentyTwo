@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="this"
+             x:Class="WeatherTwentyTwo.Next7DWidget">
+    <VerticalStackLayout BindingContext="{x:Reference this}">
+        <Label
+            Text="Daily Forecasts"
+            Margin="{OnIdiom Phone='15,0',Default='25,0'}"
+            class="SectionTitle"/>
+
+        <ScrollView Orientation="Horizontal">
+
+            <HorizontalStackLayout
+                BindableLayout.ItemsSource="{Binding WeatherReport.WeatherForecast}"
+                Spacing="12"
+                Padding="{OnIdiom Phone='15,0',Default='25,0'}">
+
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding MeasuredTime, StringFormat='{0:ddd}'}" class="Subhead"
+                               HeightRequest="34" HorizontalOptions="Center"/>
+                            <BoxView
+                                WidthRequest="1"
+                                HeightRequest="1"
+                                Margin="{Binding MaximumTemperature, Converter={StaticResource MaxTempOffsetConverter}}"
+                            />
+                            <Label Text="{Binding MaximumTemperature, Converter={StaticResource TemperatureToStringConverter}}" class="Subhead"
+                               HeightRequest="34" HorizontalOptions="Center"/>
+                            <BoxView
+                            BackgroundColor="Blue"
+                            WidthRequest="10"
+                            CornerRadius="5"
+                            HorizontalOptions="Center">
+                                <BoxView.HeightRequest>
+                                    <MultiBinding Converter="{StaticResource TempSpanConverter}">
+                                        <Binding Path="MinimumTemperature" FallbackValue="0"/>
+                                        <Binding Path="MaximumTemperature" FallbackValue="100"/>
+                                    </MultiBinding>
+                                </BoxView.HeightRequest>
+                            </BoxView>
+                            <Label
+                            Text="{Binding MinimumTemperature, Converter={StaticResource TemperatureToStringConverter}}"
+                            class="Subhead" HorizontalOptions="Center" HeightRequest="20"/>
+                            <BoxView
+                            WidthRequest="1"
+                            HeightRequest="1"
+                            Margin="{Binding MinimumTemperature, Converter={StaticResource MinTempOffsetConverter}}"
+                            />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+                
+            </HorizontalStackLayout>
+            
+        </ScrollView>
+
+    </VerticalStackLayout>
+</ContentView>

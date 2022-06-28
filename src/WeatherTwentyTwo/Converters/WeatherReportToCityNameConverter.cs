@@ -11,7 +11,7 @@ namespace WeatherTwentyTwo
         /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is WeatherResponse weatherResponse)
+            if (value is ForecastResponse weatherResponse)
             {
                 return $"{weatherResponse.CityName}, {weatherResponse.CountryCode}";
             }

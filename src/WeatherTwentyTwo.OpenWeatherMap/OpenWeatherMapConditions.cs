@@ -2,15 +2,17 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using OpenWeatherMap.Standard.Models;
+
 namespace WeatherTwentyTwo
 {
     public class OpenWeatherMapConditions : WeatherCondition
     {
-        public OpenWeatherMapConditions(OpenWeatherMap.Cache.Models.WeatherCondition condition)
+        public OpenWeatherMapConditions(Weather condition)
         {
             this.Main = condition.Main;
-            this.ConditionId = condition.ConditionId;
-            this.IconId = condition.IconId;
+            this.ConditionId = condition.Id;
+            this.IconId = condition.Icon;
             this.Description = condition.Description;
             this.WeatherType = this.GetWeatherType(this.ConditionId);
         }

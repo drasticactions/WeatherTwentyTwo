@@ -8,6 +8,9 @@
                 Shell.NavBarIsVisible="True"
                 Title="{Binding WeatherReport, Converter={StaticResource WeatherReportToCityNameConverter}}">
     <ScrollView>
-        <local:CurrentWidget WeatherReport="{Binding WeatherReport}"/>
+        <VerticalStackLayout>
+            <local:CurrentWidget WeatherReport="{Binding WeatherReport.NewestForecast}"/>
+            <local:Next7DWidget WeatherReport="{Binding WeatherReport}"/>
+        </VerticalStackLayout>
     </ScrollView>
 </local:BasePage>

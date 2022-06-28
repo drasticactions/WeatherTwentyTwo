@@ -2,23 +2,26 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using OpenWeatherMap.Cache;
 using WeatherTwentyTwo.Services;
 
 namespace WeatherTwentyTwo
 {
     public class OpenWeatherMapService : IWeatherService
     {
-        private OpenWeatherMapCache client;
+        private OpenWeatherMap.Standard.Current client;
 
-        public OpenWeatherMapService(OpenWeatherMapCache client)
+        public OpenWeatherMapService(OpenWeatherMap.Standard.Current client)
         {
             this.client = client;
+            this.client.UseHTTPS = true;
+            this.client.Units = OpenWeatherMap.Standard.Enums.WeatherUnits.Standard;
         }
 
-        public OpenWeatherMapService(string apiKey, int apiCachePeriod = 5000)
+        public OpenWeatherMapService(string apiKey)
         {
-            this.client = new OpenWeatherMapCache(apiKey, apiCachePeriod);
+            this.client = new OpenWeatherMap.Standard.Current(apiKey);
+            this.client.UseHTTPS = true;
+            this.client.Units = OpenWeatherMap.Standard.Enums.WeatherUnits.Standard;
         }
 
         public Task<IEnumerable<Location>> GetLocationsAsync(string query)
@@ -26,12 +29,10 @@ namespace WeatherTwentyTwo
             throw new NotImplementedException();
         }
 
-        public async Task<WeatherResponse> GetWeatherAsync(Coordinate location)
+        public async Task<ForecastResponse> GetWeatherAsync(Coordinate location)
         {
-            var owLocation = new OpenWeatherMap.Cache.Models.Location(location.Latitude, location.Longitude);
-            OpenWeatherMap.Cache.Models.Readings result = await this.client.GetReadingsAsync(owLocation);
-            OpenWeatherMap.Cache.Models.WeatherCondition condition = result.Weather.First();
-            return new OpenWeatherMapResponse(result);
+            var result = await this.client.GetForecastDataByCoordinatesAsync(location.Latitude, location.Longitude);
+            return new OpenWeatherMapForecast(result);
         }
     }
 }

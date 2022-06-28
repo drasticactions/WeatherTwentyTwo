@@ -11,6 +11,9 @@
             <local:WeatherReportToImageConverter x:Key="WeatherReportToImageConverter"/>
             <local:WeatherReportToCityNameConverter x:Key="WeatherReportToCityNameConverter"/>
             <local:TemperatureToStringConverter x:Key="TemperatureToStringConverter"/>
+            <local:MaxTempOffsetConverter x:Key="MaxTempOffsetConverter"/>
+            <local:MinTempOffsetConverter x:Key="MinTempOffsetConverter"/>
+            <local:TempSpanConverter x:Key="TempSpanConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

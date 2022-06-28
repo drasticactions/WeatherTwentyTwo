@@ -8,10 +8,6 @@ namespace WeatherTwentyTwo
 {
     public class WeatherResponse
     {
-        public string? CityName { get; set; }
-
-        public string? CountryCode { get; set; }
-
         public Temperature? Temperature { get; set; }
 
         public Pressure Pressure { get; set; }
@@ -47,8 +43,6 @@ namespace WeatherTwentyTwo
         public DateTime Sunset { get; set; }
 
         public TimeSpan TimeZoneOffset { get; set; }
-
-        public int CityId { get; set; }
 
         public DateTime FetchedTime { get; set; }
 

@@ -1,24 +1,29 @@
-﻿// <copyright file="TemperatureToStringConverter.cs" company="Drastic Actions">
+﻿// <copyright file="MinTempOffsetConverter.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
 using System.Globalization;
 using UnitsNet;
-using UnitsNet.Units;
 
 namespace WeatherTwentyTwo
 {
-    public class TemperatureToStringConverter : IValueConverter
+    public class MinTempOffsetConverter : IValueConverter
     {
         /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            // I _assume_ this to be Fahrenheit.
+            const double min = 40 * 3;
+
             if (value is Temperature temp)
             {
-                return string.Format("{0:F0}°", temp.ToUnit(TemperatureUnit.DegreeCelsius).Value);
+                var minTemp = temp.ToUnit(UnitsNet.Units.TemperatureUnit.DegreeFahrenheit).Value * 3;
+                var bottomMargin = minTemp - min;
+
+                return new Thickness(0, 0, 0, bottomMargin);
             }
 
-            return "NaN℉";
+            return new Thickness(0, 0, 0, 0);
         }
 
         /// <inheritdoc/>

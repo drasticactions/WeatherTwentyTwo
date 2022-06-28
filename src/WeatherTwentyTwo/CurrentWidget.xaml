@@ -30,6 +30,7 @@
                     Text="{Binding WeatherReport.DefaultCondition.Main}"
                     HorizontalOptions="Center"
                     FontSize="18"/>
+            
         </Border>
     </VerticalStackLayout>
 </ContentView>
