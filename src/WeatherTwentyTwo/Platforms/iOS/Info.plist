@@ -28,5 +28,22 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+  	<key>NSAllowsArbitraryLoads</key>
+  	<false/>
+  	<key>NSExceptionDomains</key>
+  	<dict>
+    	<key>openweathermap.org</key>
+    	<dict>
+      	<key>NSIncludesSubdomains</key>
+      	<true/>
+      	<key>NSExceptionAllowsInsecureHTTPLoads</key>
+      	<true/>
+    	</dict>
+  	</dict>
+	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Get your current location for the weather.</string>
 </dict>
 </plist>
