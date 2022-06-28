@@ -55,13 +55,16 @@ namespace WeatherTwentyTwo
 
             // If we can't get the local coordiante (User hasn't allowed it, etc)
             // Then use this as the default for now.
-            this.WeatherReport = await this.Weather.GetWeatherAsync(this.Coordinate ?? new Coordinate(42.384080, -71.178179));
+            this.WeatherReport = await this.Weather.GetWeatherAsync(this.Coordinate ?? new Coordinate(42.344903, -71.126069));
         }
 
         /// <summary>
         /// Gets the users current location.
         /// </summary>
         /// <returns><see cref="Coordinate"/>.</returns>
-        private Task<Coordinate> GetCurrentLocationAsync() => Task.FromResult(new Coordinate(42.384080, -71.178179));
+        private async Task<Coordinate> GetCurrentLocationAsync()
+        {
+            return await this.Platform.GetLocationAsync();
+        }
     }
 }

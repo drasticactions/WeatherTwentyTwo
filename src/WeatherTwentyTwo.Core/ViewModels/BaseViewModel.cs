@@ -30,6 +30,7 @@ namespace WeatherTwentyTwo
             this.Services = services;
             this.ErrorHandler = services.GetService(typeof(IErrorHandlerService)) as IErrorHandlerService ?? throw new NullReferenceException(nameof(IErrorHandlerService));
             this.Dispatcher = services.GetService(typeof(IAppDispatcher)) as IAppDispatcher ?? throw new NullReferenceException(nameof(IAppDispatcher));
+            this.Platform = services.GetService(typeof(IPlatformService)) as IPlatformService ?? throw new NullReferenceException(nameof(IPlatformService));
             this.Weather = services.GetService(typeof(IWeatherService)) as IWeatherService ?? throw new NullReferenceException(nameof(IWeatherService));
             this.RefreshAsyncCommand = new AsyncCommand(this.RefreshAsync, this.CanRefresh, this.Dispatcher, this.ErrorHandler);
             this.QuitAsyncCommand = new AsyncCommand(this.QuitAsync, null, this.Dispatcher, this.ErrorHandler);
@@ -75,6 +76,11 @@ namespace WeatherTwentyTwo
         /// Gets the Error Handler.
         /// </summary>
         public IErrorHandlerService ErrorHandler { get; }
+
+        /// <summary>
+        /// Gets the Platform service.
+        /// </summary>
+        internal IPlatformService Platform { get; }
 
         /// <summary>
         /// Gets the Weather service.

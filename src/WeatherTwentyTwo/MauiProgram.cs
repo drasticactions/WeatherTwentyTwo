@@ -13,6 +13,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IAppDispatcher, AppDispatcher>();
         builder.Services.AddSingleton<IErrorHandlerService, ErrorHandler>();
         builder.Services.AddSingleton<IWeatherService>(new OpenWeatherMapService(ApiKeys.OpenWeatherMapApi));
+        builder.Services.AddSingleton<IPlatformService, MauiPlatformService>();
         builder.Services.AddTransient<HomePage>();
         builder
             .UseMauiApp<App>()
