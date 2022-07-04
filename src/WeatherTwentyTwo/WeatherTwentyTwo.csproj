@@ -46,11 +46,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\WeatherTwentyTwo.Core\WeatherTwentyTwo.Core.csproj" />
-	  <ProjectReference Include="..\WeatherTwentyTwo.OpenWeatherMap\WeatherTwentyTwo.OpenWeatherMap.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiXaml Update="CurrentWidget.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -69,4 +64,7 @@
 	  <PackageReference Include="UnitsNet" Version="5.0.0-alpha006" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\WeatherTwentyTwo.Core\WeatherTwentyTwo.Core.csproj" />
+	</ItemGroup>
 </Project>

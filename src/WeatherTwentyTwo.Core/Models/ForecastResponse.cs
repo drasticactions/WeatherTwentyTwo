@@ -12,8 +12,8 @@ namespace WeatherTwentyTwo
 
         public string? CountryCode { get; set; }
 
-        public WeatherResponse? NewestForecast => this.WeatherForecast.FirstOrDefault();
+        public WeatherResponse? NewestDailyForecast => this.DailyWeatherForecast.FirstOrDefault();
 
-        public List<WeatherResponse> WeatherForecast { get; set; } = new List<WeatherResponse>();
+        public List<WeatherResponse> DailyWeatherForecast { get; set; } = new List<WeatherResponse>();
     }
 }

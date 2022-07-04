@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WeatherTwentyTwo.Core\WeatherTwentyTwo.Core.csproj" />
     <ProjectReference Include="..\WeatherTwentyTwo.OpenWeatherMap\WeatherTwentyTwo.OpenWeatherMap.csproj" />
   </ItemGroup>
 
